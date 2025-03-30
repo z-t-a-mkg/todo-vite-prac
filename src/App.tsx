@@ -2,40 +2,62 @@ import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-import { InputForm } from './componets/Inputform'
+import { InputForm } from './Components/Inputform'
 
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+
+//----------state--------------------------------
+  //開始
+  const [startDate, setStartDate] = useState<string>("");
+
+  //終了予定
+  const [finishedDate, setFinishedDate] = useState<string>("");
+
+  //Todo入力フォーム
+  const [inputTodo, setInputTodo] = useState<string>("");
+
+  //優先度
+  const [selectPriority, setPriority] = useState("");
 
 
+  //----------props--------------------------------
+  //優先度選択
+  const optionVal = ['高','中','低'];
 
-  const optionVal = ['優先度','高','中','低'];
-
-
+  const funcOnChange = (setState: (val: string) => void) => {
+    return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      setState(e.target.value);
+    };
+  };
   return (
     <>
-    <div className='inputFormContainer'>
-      <InputForm  optionVal={ optionVal }/>
-    </div>
+    {/* inputform */}
+      <div className='inputFormContainer'>
+      <InputForm
+        inputTodo={inputTodo}
+        onChangeForm={funcOnChange(setInputTodo)}
+
+        optionVal={optionVal}
+        selectPriority={selectPriority}
+        onChangePriority={funcOnChange(setPriority)}
+
+        startDate={startDate}
+        finishedDate={finishedDate}
+        onChangeStartDate={funcOnChange(setStartDate)}
+        onChangeFinishDate={funcOnChange(setFinishedDate)}
+
+        buttonName="登録"
+        />
+      </div>
 
       <div className='addCreateTodoContainer'>
-        <p>○○をする</p>
-        <button>編集</button>
-        <button>完了</button>
     </div>
 
       <div className='finishedTodoContainer'>
-          <p>○○をした</p>
-          <button>戻す</button>
-          <button>削除</button>
       </div>
-
-
-
-
     </>
   )
 }
 
-export default App
+
