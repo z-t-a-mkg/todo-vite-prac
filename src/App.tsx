@@ -1,13 +1,11 @@
-import { useState } from 'react'
+import { useState } from "react";
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
-import { InputForm } from './Components/Inputform'
-
+import "./App.css";
+import { InputForm } from "./Components/Inputform";
 
 export function App() {
-
-//----------state--------------------------------
+  //----------state--------------------------------
   //開始
   const [startDate, setStartDate] = useState<string>("");
 
@@ -18,12 +16,11 @@ export function App() {
   const [inputTodo, setInputTodo] = useState<string>("");
 
   //優先度
-  const [selectPriority, setPriority] = useState("");
-
+  const [selectPriority, setPriority] = useState<string>("");
 
   //----------props--------------------------------
   //優先度選択
-  const optionVal = ['高','中','低'];
+  const optionVal = ["高", "中", "低"];
 
   const funcOnChange = (setState: (val: string) => void) => {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -32,32 +29,25 @@ export function App() {
   };
   return (
     <>
-    {/* inputform */}
-      <div className='inputFormContainer'>
-      <InputForm
-        inputTodo={inputTodo}
-        onChangeForm={funcOnChange(setInputTodo)}
-
-        optionVal={optionVal}
-        selectPriority={selectPriority}
-        onChangePriority={funcOnChange(setPriority)}
-
-        startDate={startDate}
-        finishedDate={finishedDate}
-        onChangeStartDate={funcOnChange(setStartDate)}
-        onChangeFinishDate={funcOnChange(setFinishedDate)}
-
-        buttonName="登録"
+      {/* inputform */}
+      <div className="inputFormContainer">
+        <InputForm
+          inputTodo={inputTodo}
+          onChangeForm={funcOnChange(setInputTodo)}
+          optionVal={optionVal}
+          selectPriority={selectPriority}
+          onChangePriority={funcOnChange(setPriority)}
+          startDate={startDate}
+          finishedDate={finishedDate}
+          onChangeStartDate={funcOnChange(setStartDate)}
+          onChangeFinishDate={funcOnChange(setFinishedDate)}
+          buttonName="登録"
         />
       </div>
 
-      <div className='addCreateTodoContainer'>
-    </div>
+      <div className="addCreateTodoContainer"></div>
 
-      <div className='finishedTodoContainer'>
-      </div>
+      <div className="finishedTodoContainer"></div>
     </>
-  )
+  );
 }
-
-
