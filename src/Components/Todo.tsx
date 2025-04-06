@@ -4,6 +4,7 @@ type TodoProps = {
   inputTodo: string;
   selectPriority: string;
   onClickFinish: () => void;
+  onClickDelete: () => void;
   buttonName:string;
   buttonName2:string;
 };
@@ -16,11 +17,10 @@ export const Todo = ({
   buttonName,
   buttonName2,
   onClickFinish,
+  onClickDelete,
 }: TodoProps) => (
-  
-  <div className="todoItems">
-    <h3>進行中または予定しているTODO</h3>
 
+  <div className="todoItems">
     <div className="date">
       <p>{startDate}</p>
       <p>～</p>
@@ -44,7 +44,7 @@ export const Todo = ({
           : "black"
     }}>{selectPriority}</p>
      <button onClick={onClickFinish}>{buttonName}</button>
-     <button>{buttonName2}</button>
+     <button onClick={onClickDelete}>{buttonName2}</button>
     </div>
   </div>
 

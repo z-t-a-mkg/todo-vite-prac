@@ -79,6 +79,16 @@ export function App() {
 
   //登録ボタンクリック時の処理
   const handleSubmit = () => {
+    if (
+      !startDate ||
+      !finishedDate ||
+      !inputTodo.trim() ||
+      !selectPriority
+    ) {
+      alert("すべての項目を入力してください！");
+      return;
+    }
+
     const newTodo = {
       startDate,
       finishedDate,
@@ -101,6 +111,31 @@ export function App() {
     setTodoList(newTodoList);
     setFinishedTodoList([...finishedTodoList,finishedTodoItem]);
   };
+
+  //戻すボタンをクリック時の処理
+  const restoreHandleSubmit = (index: number) => {
+    const restoreTodo = finishedTodoList[index];
+    const newFinishedList = [...finishedTodoList];
+    newFinishedList.splice(index, 1);
+
+    setFinishedTodoList(newFinishedList);
+    setTodoList([...todoList, restoreTodo]);
+  };
+
+  // 未完了の削除ボタン
+  const deleteTodo = (index:number) => {
+    const newList = [...todoList];
+    newList.splice(index,1);
+    setTodoList(newList);
+  }
+
+   // 未完了の削除ボタン
+   const finishedDeleteTodo = (index:number) => {
+    const newList = [...finishedTodoList];
+    newList.splice(index,1);
+    setFinishedTodoList(newList);
+  }
+
 
 
   return (
@@ -127,22 +162,29 @@ export function App() {
       </div>
 
       <div className="addCreateTodoContainer">
-      {todoList.map((todo, index) => (
-          <Todo
-          key={index}
-          {...todo}
-          onClickFinish={() => finishHandleSubmit(index)}
-          buttonName="完了"
-          buttonName2="削除"
+        <h3>進行中または予定しているTODO</h3>
 
-          />
-        ))}
-
+        {todoList.length === 0 ? (
+          <p>登録がありません。</p>
+        ) : (
+          todoList.map((todo, index) => (
+            <Todo
+              key={index}
+              {...todo}
+              onClickFinish={() => finishHandleSubmit(index)}
+              onClickDelete={() => deleteTodo(index)}
+              buttonName="完了"
+              buttonName2="削除"
+            />
+          ))
+        )}
       </div>
 
       <div className='finishedTodoContainer'>
         <FinishedTodo
         finishedList={finishedTodoList}
+        onClickRestore={(index) => restoreHandleSubmit(index)}
+        onClickDelete={finishedDeleteTodo}
         buttonName="戻す"
         buttonName2="削除"
         />

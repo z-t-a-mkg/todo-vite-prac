@@ -7,12 +7,16 @@ type TodoType = {
 
   type FinishedTodoProps = {
     finishedList: TodoType[];
+    onClickRestore: (index: number) => void;
+    onClickDelete: (index: number) => void;
     buttonName: string;
     buttonName2: string;
   };
 
   export const FinishedTodo = ({
     finishedList,
+    onClickRestore,
+    onClickDelete,
     buttonName,
     buttonName2,
   }: FinishedTodoProps) => {
@@ -56,8 +60,8 @@ type TodoType = {
                 >
                   {todo.selectPriority}
                 </p>
-                <button>{buttonName}</button>
-                <button>{buttonName2}</button>
+                <button onClick={() => onClickRestore(index)}>{buttonName}</button>
+                <button onClick={() => onClickDelete(index)}>{buttonName2}</button>
               </div>
             </div>
           ))
