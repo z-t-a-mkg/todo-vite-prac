@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+.date{
+  display: flex;
+}
+.todoDetail{
+  display: flex;
+}
+
+
+
+

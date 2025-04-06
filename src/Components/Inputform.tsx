@@ -12,6 +12,7 @@ interface Props {
     onChangeFinishDate: React.ChangeEventHandler<HTMLInputElement>;
 
     buttonName:string;
+    onClickSubmit: () => void;
 }
 
 
@@ -26,8 +27,11 @@ export const InputForm = ({
     finishedDate,
     onChangeStartDate,
     onChangeFinishDate,
+    onClickSubmit,
 
 }:Props) =>{
+
+
     return(
         <>
             <div className="flexBox">
@@ -51,7 +55,9 @@ export const InputForm = ({
             }
             </select>
             <div>
-                <button>{buttonName}</button>
+            <button onClick={onClickSubmit}>{buttonName}</button>
+
+
             </div>
         </>
     );
